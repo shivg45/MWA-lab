@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fade In Fade Out</title>
+<style>
+    #fadeElement {
+        width: 200px;
+        height: 100px;
+        background-color: lightblue;
+        display: none; /* initially hidden */
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<button id="fadeButton">Toggle Fade</button>
+
+<div id="fadeElement">This element will fade in and out</div>
+
+<script>
+    const fadeButton = document.getElementById('fadeButton');
+    const fadeElement = document.getElementById('fadeElement');
+
+    let isFaded = false;
+
+    fadeButton.addEventListener('click', function() {
+        if (!isFaded) {
+            fadeIn(fadeElement);
+        } else {
+            fadeOut(fadeElement);
+        }
+        isFaded = !isFaded;
+    });
+
+    function fadeIn(element) {
+        let opacity = 0;
+        element.style.display = 'block';
+        const fadeInInterval = setInterval(function() {
+            if (opacity < 1) {
+                opacity += 0.1;
+                element.style.opacity = opacity;
+            } else {
+                clearInterval(fadeInInterval);
+            }
+        }, 50);
+    }
+
+    function fadeOut(element) {
+        let opacity = 1;
+        const fadeOutInterval = setInterval(function() {
+            if (opacity > 0) {
+                opacity -= 0.1;
+                element.style.opacity = opacity;
+            } else {
+                clearInterval(fadeOutInterval);
+                element.style.display = 'none';
+            }
+        }, 50);
+    }
+</script>
+
+</body>
+</html>
